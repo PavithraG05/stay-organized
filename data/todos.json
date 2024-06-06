@@ -74,7 +74,7 @@
     {
         "id": 9,
         "userid": 3,
-        "category": "Errands",
+        "category": "Errand",
         "description": "Transport Ralph's Goats to the farm",
         "deadline": "2023-12-07",
         "priority": "Medium",
