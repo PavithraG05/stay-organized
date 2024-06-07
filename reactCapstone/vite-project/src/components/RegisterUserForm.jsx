@@ -8,6 +8,9 @@ const userForm = {
     ConfirmPassword:"",
 }
 
+const userData = {
+        
+}
 
 const RegisterUserForm = () => {
 
@@ -17,17 +20,11 @@ const RegisterUserForm = () => {
     const [passwordErr, setPasswordErr ] = useState("");
     const [confirmPasswordErr, setConfirmPasswordErr ] = useState("");
     const [showPassword, setShowPassword] = useState(true);
-    const [isUsernameExist,setIsUsernameExist] = useState(false);
-
+    const [apiErr, setApiErr] = useState("");
+    
     // useEffect(()=>{handleConfirmPassword();
     //     console.log("password changed")
     // },[form.Password]);
-
-    const userData = {
-        name: "",
-        username: "",
-        password: "",
-    }
     
     function handleChange(e){
         const name = e.target.name;
@@ -42,7 +39,7 @@ const RegisterUserForm = () => {
 
     function sendUserData(){
         
-        fetch('http://localhost:8083/api/users',
+        fetch('http://localhost:8085/api/users',
             {
                 method: "POST",
                 headers:{"content-type":"application/json"},
@@ -55,6 +52,7 @@ const RegisterUserForm = () => {
         })
         .catch((error) => {
             console.log(error)
+            setApiErr("Error fetching details using API");
         });
     }
 
@@ -81,7 +79,7 @@ const RegisterUserForm = () => {
     }
 
     function checkUserNameExist(){
-        fetch(`http://localhost:8083/api/username_available/${form.Username}`,{
+        fetch(`http://localhost:8085/api/username_available/${form.Username}`,{
             method:"GET"
         })
         .then((response) => response.json())
@@ -89,7 +87,8 @@ const RegisterUserForm = () => {
             if(data.available){
                 console.log("true: user do not exists");
                 // setIsUsernameExist(data.available);
-                userData.username = form.Username;
+                userData['username'] = form.Username;
+                console.log(userData);
                 return;
             }
             else{
@@ -100,7 +99,8 @@ const RegisterUserForm = () => {
             }
         })
         .catch((error) => {
-            console.log(error)
+            console.log(error);
+            setApiErr("Error fetching details using API");
         });
     }
 
@@ -113,7 +113,10 @@ const RegisterUserForm = () => {
         else{
             const regex = new RegExp('^[a-zA-Z][a-zA-Z ]*$');
             let userRegexMatch = regex.test(form.FullName);
-            userRegexMatch ? userData.name = form.FullName : setFullNameErr("Name must include only letters (a-zA-Z)");
+            // let var1 = "";
+            userRegexMatch ? userData['name'] = form.FullName : setFullNameErr("Name must include only letters (a-zA-Z)");
+            // console.log(var1);
+            console.log(userData);
         }
     }
 
@@ -127,6 +130,7 @@ const RegisterUserForm = () => {
             const regex = new RegExp('^(?=.*[a-zA-Z])[a-zA-Z][a-zA-Z0-9]{5,}$');
             let userRegexMatch = regex.test(form.Username);
             userRegexMatch ? checkUserNameExist() :setUserNameErr("Username must contain alphanumeric characters only");
+            
         }
     }
 
@@ -152,7 +156,8 @@ const RegisterUserForm = () => {
         }
         else{
             console.log("check");
-            form.ConfirmPassword === form.Password ? userData.password = form.Password : setConfirmPasswordErr("Password did not match");
+            form.ConfirmPassword === form.Password ? userData['password'] = form.Password: setConfirmPasswordErr("Password did not match");
+            console.log(userData);
         }
         
     }
@@ -210,10 +215,10 @@ const RegisterUserForm = () => {
                     </div>}
                 </div>
                 
-                <div id="addRegisterMessage" className={styles.errorFormField}></div>
+                {apiErr && <div className={styles.errorFormField}>{apiErr}</div>}
 
                 <div className="row p-3 justify-content-center">
-                    <button className={`btn text-white ${styles.registerBtn} rounded-0`} type="button" id="registerBtn" onClick={handleSubmit}>REGISTER</button>
+                    <button className={`btn text-white ${styles.registerBtn} rounded-0`} type="submit" id="registerBtn" onClick={handleSubmit}>REGISTER</button>
                 </div>
             </form>
            

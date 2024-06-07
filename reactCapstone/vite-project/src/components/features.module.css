@@ -1,0 +1,12 @@
+.homeFeaturesTitle{
+    padding: 10px 10px 10px 40px;
+    font-size: 23px;
+    background-color: aliceblue;
+    
+}
+
+.homeCardImgTop{
+    width: 100%;
+    height: 25vw;
+    object-fit: cover;
+}

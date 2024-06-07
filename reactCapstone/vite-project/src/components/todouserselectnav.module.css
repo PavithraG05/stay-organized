@@ -1,0 +1,25 @@
+.todoContainer{
+    margin:90px 5px 50px 35px;
+}
+
+.todoSelect{
+    font-weight: 550 !important;
+    border: 1px solid black !important;
+    background-color: whitesmoke !important;
+}
+
+.errorFormField{
+    color:red;
+    font-size: 14px;
+    padding:5px 0px;
+}
+
+.todoAddBtnClass{
+    width:80%;
+    float: right;
+    background-color: gainsboro !important;
+}
+
+.todoAddIcon{
+    float: left;
+}

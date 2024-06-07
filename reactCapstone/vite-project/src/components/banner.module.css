@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css?family=Lugrasimo');
+.homeBlockquote{
+    padding: 100px 20px 20px 20px;
+    font-size: 40px;
+    text-align: center;
+    border: 1px solid lightblue;
+    /*
+    background-color: #FFFE5D;
+    background-image: url('../images/test3.webp');
+    opacity:0.3;
+    background-image: url('../images/test2.jpeg');
+    background-repeat: no-repeat;
+    background-image: url('../images/todo-3.jpeg');
+    background-repeat: no-repeat;
+    background-position: center;
+    */
+}
+
+.homeBlockquoteText{
+    font-family:"Lugrasimo";
+}
+
+.lugrasimo-regular {
+    font-family: "Lugrasimo", cursive;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.homeBtn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #5d5eff !important;
+    color: white !important;
+    font-size: 18px !important;
+}

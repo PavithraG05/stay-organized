@@ -1,0 +1,32 @@
+.newtodoContainer {
+    max-width: 550px;
+    height: 550px;
+    margin: 130px auto;
+    margin-bottom: 70px;
+    margin-left: 50px;
+    padding: 30px;
+    border-radius: 5px;
+    background-color: whitesmoke;
+}
+
+.newtodoBtn{
+    width:200px;
+    background-color: #5d5eff !important;
+}
+
+.errorFormField{
+    color:red;
+    font-size: 14px;
+    padding:5px 0px;
+}
+
+.inputHover{
+    cursor: pointer;
+}
+
+.formText{
+    font-size: 13px !important;
+    text-align: justify;
+    padding-left: 2px;
+    color:gray;
+}
