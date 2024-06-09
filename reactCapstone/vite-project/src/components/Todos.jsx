@@ -1,20 +1,36 @@
+import Countometer from './Countometer';
+import ModalDialog from './ModalDialog';
+import TodoCard from './TodoCard';
 import styles from './todos.module.css'
 import useFetch from './useFetch';
+import { useEffect, useState } from 'react';
 
-const Todos = (props) => {
+const Todos = ({userid, countTodo, setCountTodo, todos, setTodos}) => {
 
-    
-    const {data: todos, loading, error} = useFetch(`todos/byuser/${props.userid}`);
-    console.log(todos);
-    if (loading) return "Loading...";
-
-    console.log(props.userid);
+    const [show, setShow] = useState(false);
+    // const [todoTask, setTodoTask] = useState([]);
+    console.log(`In Todos ${JSON.stringify(todos)}`);
     return(
-        <div>
-            <div className={styles.TodoImageContainer}>
+        <>
+        
+        <div className={`row row-cols-lg-1 gx-0`}>
+            {(userid === null || todos.length === 0) && <div className={styles.TodoImageContainer}>
                 <img src="/todo2.jpeg" alt="no to-do to show yet" className={styles.noTodosImage}/>
-            </div>
+            </div>}
+
+            {todos.length > 0 && todos.map((todo) => {
+                    console.log(`loop ${JSON.stringify(todo)}`);
+                    return(
+                        <>
+                            
+                            <TodoCard todo={todo} setShow={setShow} todos={todos} setTodos={setTodos}/>
+                        </>
+                    )
+                })}
+            {/* {console.log(count)} */}
+            <Countometer todos = {todos} countTodo={countTodo} setCountTodo = {setCountTodo}/>
         </div>
+        </>
     )
 }
 

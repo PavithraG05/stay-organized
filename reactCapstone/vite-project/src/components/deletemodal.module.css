@@ -1,0 +1,13 @@
+.noteText{
+    font-size: 14px;
+}
+
+.btnColor{
+    background-color:#5d5eff !important;
+}
+
+.errorFormField{
+    color:red;
+    font-size: 16px;
+    padding:5px 0px 5px 0px;
+}

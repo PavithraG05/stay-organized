@@ -3,12 +3,12 @@ import { useState, useEffect } from 'react';
 import TodoCountCategory from './TodoCountCategory';
 import useFetch from './useFetch';
 
-const TodoCounts = () => {
+const TodoCounts = ({countTodo}) => {
 
     const [categoryApiErr, setCategoryApiErr] = useState("");
 
     const {data: categories, loading, error} = useFetch("categories");
-    console.log(categories);
+    console.log("category populating from api");
     if (loading) return "Loading...";
     if(error) setCategoryApiErr("Error fetching categories using API");
 
@@ -27,10 +27,10 @@ const TodoCounts = () => {
                 <ul className={styles.todoAsideList} id="todo-allCategory">
                     <li  className={styles.todoAsideSubList}>
                         <span onclick="filterAll()">Total Tasks &nbsp;&nbsp;</span>
-                        <span id="todo-alltask-count" className={`badge text-bg-secondary ${styles.todoCountBadge}`}></span>
+                        <span className={`badge text-bg-secondary ${styles.todoCountBadge}`}>{countTodo.totalCount}</span>
                         
                         {categories && categories.map((category)=>{
-                            return (<TodoCountCategory category = {category.name}/>);
+                            return (<TodoCountCategory category = {category.name} countTodo={countTodo}/>);
                         })}
 
                     </li>
@@ -44,13 +44,13 @@ const TodoCounts = () => {
                     <li className={styles.todoAsideSubList}>
                         <i className="bi bi-check-circle-fill" id="completedIcon"></i>
                         <span onclick="filterStatus(`Completed`)">&nbsp;Completed&nbsp;&nbsp;</span>
-                        <span id="todo-completed-count" className={`badge text-bg-secondary ${styles.todoCountBadge}`}></span>
+                        <span id="todo-completed-count" className={`badge text-bg-secondary ${styles.todoCountBadge}`}>{countTodo.completedCount}</span>
                         
                     </li>
                     <li className={styles.todoAsideSubList}>
                         <i className="bi bi-exclamation-circle-fill"></i>
                         <span onclick="filterStatus(`Pending`)">&nbsp;Pending&nbsp;&nbsp;</span>
-                        <span id="todo-pending-count" className={`badge text-bg-secondary ${styles.todoCountBadge}`}></span>
+                        <span id="todo-pending-count" className={`badge text-bg-secondary ${styles.todoCountBadge}`}>{countTodo.pendingCount}</span>
                         
                     </li>
                 </ul>
@@ -64,19 +64,19 @@ const TodoCounts = () => {
                     <li className={styles.todoAsideSubList}>
                         <i className="bi bi-flag-fill text-danger"></i>
                         <span onclick="filterPriority(`high`)">&nbsp;High&nbsp;&nbsp;</span>
-                        <span id="todo-high-count" className={`badge text-bg-secondary ${styles.todoCountBadge}`}></span>
+                        <span id="todo-high-count" className={`badge text-bg-secondary ${styles.todoCountBadge}`}>{countTodo.highCount}</span>
                         
                     </li>
                     <li className={styles.todoAsideSubList}>
                         <i className="bi bi-flag-fill text-warning"></i>
                         <span onclick="filterPriority(`medium`)">&nbsp;Medium&nbsp;&nbsp;</span>
-                        <span id="todo-medium-count" className={`badge text-bg-secondary ${styles.todoCountBadge}`}></span>
+                        <span id="todo-medium-count" className={`badge text-bg-secondary ${styles.todoCountBadge}`}>{countTodo.mediumCount}</span>
                         
                     </li>
                     <li className={styles.todoAsideSubList}>
                         <i className="bi bi-flag-fill text-success"></i>
                         <span onclick="filterPriority(`low`)">&nbsp;Low&nbsp;&nbsp;</span>
-                        <span id="todo-low-count" className={`badge text-bg-secondary ${styles.todoCountBadge}`}></span>
+                        <span id="todo-low-count" className={`badge text-bg-secondary ${styles.todoCountBadge}`}>{countTodo.lowCount}</span>
                         
                     </li>
                 </ul>

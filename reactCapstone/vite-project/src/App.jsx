@@ -7,6 +7,7 @@ import {BrowserRouter, Routes, Route, Link} from 'react-router-dom'
 import ToastMsg from './components/ToastMsg'
 import ViewTodo from './components/ViewTodo'
 import Home from './components/Home'
+import PageNotFound from './components/PageNotFound'
 
 
 function App() {
@@ -22,9 +23,11 @@ function App() {
             <Route path="/addtodo" element ={<AddTodo/>}/>
             <Route path="/viewtodo" element ={<ViewTodo/>}/>
             <Route path="/register" element ={<Register/>}/>
+            <Route path="*" element={<PageNotFound/>}/>
           </Routes>
 
         <ToastMsg/>
+        {/* <Test/> */}
       </BrowserRouter>
     </div>
   )

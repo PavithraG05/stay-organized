@@ -5,7 +5,7 @@ import useFetch from './useFetch';
 const TodoUserSelectNav = ({setUserid}) => {
     
     const {data: usernames, loading, error} = useFetch("users");
-    console.log(usernames);
+    console.log("users populated in select");
     if (loading) return "Loading...";
 
     function handleChange(e){

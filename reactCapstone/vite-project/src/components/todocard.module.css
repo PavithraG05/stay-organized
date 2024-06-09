@@ -1,0 +1,73 @@
+
+.todoCard{
+    width:20vw;
+    border-width: 0px !important;
+    padding: 0px 20px 0px 50px !important;
+}
+
+.todoCategoryHeader{
+    height: 45px;
+}
+
+.todoCategoryTitle{
+    font-size: 16px;
+    font-weight: 600 !important;
+}
+
+.todoCategoryColorDot{
+    height: 14px;
+    width: 14px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.todoIcons{
+    float:right;
+}
+
+.biStar, .biPencilSquare, .biTrash,.biCheckCircle{
+    padding-left: 10px;
+    font-size: 1.2rem;
+    color: black;
+    cursor: pointer;
+}
+
+.todoBody{
+    font-size:13px;
+}
+
+.todoDesc{
+    font-size: 17x;
+    padding-left: 0px;
+}
+
+.todoStatus{
+    float: right;
+}
+
+.biCheckCircleFill{
+    padding-left: 10px;
+    font-size: 1.2rem;
+    color: green;
+    cursor: pointer;
+}
+
+.strike{
+    text-decoration: line-through;
+}
+
+
+
+
+.bi-check-circle:hover, .bi-check-circle-fill:hover{
+    opacity: 0.8;
+    font-size: 1.1rem;
+}
+
+.completebtn{
+    float: right;
+    font-size: 15px !important;
+    padding: 0;
+}
+

@@ -1,3 +1,9 @@
 .todosArea{
     font-family:Calibri, 'Trebuchet MS', sans-serif;
 }
+
+.errorFormField{
+    color:red;
+    font-size: 16px;
+    padding:5px 0px 5px 0px;
+}

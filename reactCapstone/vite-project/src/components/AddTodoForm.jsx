@@ -154,7 +154,7 @@ const AddTodoForm = () => {
                         </div>
                         <div className="form-group p-2">
                             <label className="form-label">Description*</label>
-                            <textarea className={`form-control ${styles.inputHover}`} id="description" rows="3"  name="Description" value={form.Description} onChange={handleChange} onBlur={validateDescription}></textarea>
+                            <textarea className={`form-control`} id="description" rows="3"  name="Description" value={form.Description} onChange={handleChange} onBlur={validateDescription}></textarea>
                             <div className={`${styles.formText}`}>
                                 Specify the task description in minimum words.
                             </div>
@@ -172,15 +172,15 @@ const AddTodoForm = () => {
                         <div className="form-group p-2">
                             <label>Priority*</label>
                             <div className="form-check form-check-inline mx-3">
-                                <input className={`form-check-input ${styles.inputHover}`} type="radio" name="Priority" value="low" onChange={handleChange} checked={form.Priority==='low'} onBlur={validatePriority}/>
+                                <input className={`form-check-input ${styles.inputHover}`} type="radio" name="Priority" value="Low" onChange={handleChange} checked={form.Priority==='Low'} onBlur={validatePriority}/>
                                 <label className="form-check-label">Low</label>
                             </div>
                             <div className="form-check form-check-inline mx-3">
-                                <input className={`form-check-input ${styles.inputHover}`} type="radio" name="Priority" value="medium" onChange={handleChange} checked={form.Priority==='medium'} onBlur={validatePriority}/>
+                                <input className={`form-check-input ${styles.inputHover}`} type="radio" name="Priority" value="Medium" onChange={handleChange} checked={form.Priority==='Medium'} onBlur={validatePriority}/>
                                 <label className="form-check-label">Medium</label>
                             </div>
                             <div className="form-check form-check-inline mx-3">
-                                <input className={`form-check-input ${styles.inputHover}`} type="radio" name="Priority" value="high" onChange={handleChange} checked={form.Priority==='high'} onBlur={validatePriority}/>
+                                <input className={`form-check-input ${styles.inputHover}`} type="radio" name="Priority" value="High" onChange={handleChange} checked={form.Priority==='High'} onBlur={validatePriority}/>
                                 <label className="form-check-label">High</label>
                             </div>
                             {priorityErr && <div className={`${styles.errorFormField}`}>
