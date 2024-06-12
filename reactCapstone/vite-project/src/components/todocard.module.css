@@ -26,8 +26,8 @@
     float:right;
 }
 
-.biStar, .biPencilSquare, .biTrash,.biCheckCircle{
-    padding-left: 10px;
+.biPencilSquare, .biTrash,.biCheckCircle{
+    padding-left: 17px;
     font-size: 1.2rem;
     color: black;
     cursor: pointer;
@@ -47,7 +47,7 @@
 }
 
 .biCheckCircleFill{
-    padding-left: 10px;
+    padding-left: 17px;
     font-size: 1.2rem;
     color: green;
     cursor: pointer;
@@ -57,11 +57,12 @@
     text-decoration: line-through;
 }
 
+mark{
+    background-color: lightsalmon !important;
+}
 
-
-
-.bi-check-circle:hover, .bi-check-circle-fill:hover{
-    opacity: 0.8;
+.biCheckCircle:hover, .biCheckCircleFill:hover{
+    opacity: 0.9;
     font-size: 1.1rem;
 }
 

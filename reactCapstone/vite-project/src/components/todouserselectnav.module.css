@@ -4,8 +4,9 @@
 
 .todoSelect{
     font-weight: 550 !important;
-    border: 1px solid black !important;
+    border: 1px solid gray !important;
     background-color: whitesmoke !important;
+    /* outline-width: rebeccapurple !important; */
 }
 
 .errorFormField{
@@ -22,4 +23,10 @@
 
 .todoAddIcon{
     float: left;
+}
+
+.todoSelect:focus{
+    border-width: 0.1px !important;
+    border-color: gray !important;
+    box-shadow: 0 0 0 0.09rem gray !important;
 }

@@ -2,7 +2,7 @@ import styles from './todouserselectnav.module.css';
 import useFetch from './useFetch';
 
 
-const TodoUserSelectNav = ({setUserid}) => {
+const TodoUserSelectNav = ({setUserid, apiError}) => {
     
     const {data: usernames, loading, error} = useFetch("users");
     console.log("users populated in select");
@@ -32,13 +32,17 @@ const TodoUserSelectNav = ({setUserid}) => {
                                         );
                                         })}
                                 </select>
+                                {apiError && <div className={`${styles.errorFormField}`}>
+                                    {apiError}
+                                </div>}
                                 {error && <div className={`${styles.errorFormField}`}>
-                                    Error fetching details using API
+                                    Error fetching user details using API
                                 </div>}
                             </div>
                         </div>
+                        
                         <div className="col-sm-12 col-md-3 col-xl-3">
-                            <button className={`btn fw-bold ${styles.todoAddBtnClass}`} type="button" id="addTodosBtn"><i className={`bi bi-plus-square-fill ${styles.todoAddIcon}`}></i>Add Todo Task</button>
+                            <a className={`btn fw-bold ${styles.todoAddBtnClass}`} type="button" id="addTodosBtn" href="/addtodo"><i className={`bi bi-plus-square-fill ${styles.todoAddIcon}`}></i>Add Todo Task</a>
                         </div>
                     </div>
                 </form>

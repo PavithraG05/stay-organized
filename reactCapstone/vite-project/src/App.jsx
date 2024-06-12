@@ -26,7 +26,7 @@ function App() {
             <Route path="*" element={<PageNotFound/>}/>
           </Routes>
 
-        <ToastMsg/>
+        {/* <ToastMsg/> */}
         {/* <Test/> */}
       </BrowserRouter>
     </div>

@@ -1,6 +1,6 @@
 .newtodoContainer {
     max-width: 550px;
-    height: 550px;
+    height: 590px;
     margin: 130px auto;
     margin-bottom: 70px;
     margin-left: 50px;
@@ -29,4 +29,11 @@
     text-align: justify;
     padding-left: 2px;
     color:gray;
+}
+
+.successMsg{
+    color:green;
+    font-size: 17px;
+    /* padding:5px 0px; */
+    text-align: center;
 }

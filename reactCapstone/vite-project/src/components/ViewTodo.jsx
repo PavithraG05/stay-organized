@@ -1,4 +1,5 @@
 import TodoCounts from "./TodoCounts"
+import Countometer from './Countometer';
 import TodoUserSelectNav from "./TodoUserSelectNav"
 import Todos from "./Todos"
 import styles from './viewtodos.module.css'
@@ -21,12 +22,19 @@ const ViewTodo = () => {
         completedCount:0,
         pendingCount:0
     }
+
+    // Required in countometer
     const [countTodo, setCountTodo] = useState(count);
+    //Required in filter status
+    const [filterState, setFilterState] = useState(false);
+
     const [apiError, setApiError] = useState("");
     const [userid, setUserid] = useState(null);
     const [todos, setTodos] = useState([]);
+    const [filteredArray, setFilteredArray]= useState([]);
 
     console.log(count);
+    // let filteredArray = [];
     useEffect(()=>{
         async function init(){
            
@@ -52,24 +60,33 @@ const ViewTodo = () => {
             }
 
         }
-        init();
+
+        if(userid === ""){
+            setApiError("Select an user from dropdown");
+            setTodos([]);
+        }
+        else{
+            init();
+        }
         // data = JSON.parse(todos_list);
         // setTodos(JSON.parse(todos_list));
     },[userid]);
     console.log(`Todos ${todos.length}`);
     return(
+        <>
         <div className={styles.todosArea}>
             <div className="row">
                 <div className="col-lg-4 col-xl-3 bg-light">
-                    <TodoCounts countTodo={countTodo}/>
+                    <TodoCounts countTodo={countTodo} todos={todos} setTodos={setTodos} setFilterState={setFilterState} setFilteredArray={setFilteredArray}/>
                 </div>
                 <div className="col-lg-7 col-xl-8 g-2">
-                    <TodoUserSelectNav setUserid={setUserid}/>
-                    {apiError && <div className={`${styles.errorFormField}`}>{apiError} </div>}
-                    <Todos userid={userid} countTodo={countTodo} setCountTodo={setCountTodo} todos={todos} setTodos={setTodos}/>
+                    <TodoUserSelectNav setUserid={setUserid} apiError={apiError}/>
+                    <Todos userid={userid} todos={todos} setTodos={setTodos} filterState={filterState} setFilterState={setFilterState} filteredArray={filteredArray}/>
                 </div>
             </div>
         </div>
+        <Countometer todos = {todos} countTodo={countTodo} setCountTodo = {setCountTodo}/>
+        </>
     );
 }
 

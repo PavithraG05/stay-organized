@@ -31,7 +31,7 @@ const Features = () => {
                     <div className="card rounded-0">
                         <img src="/home-feature-3.png" className={`${styles.homeCardImgTop}`} alt="..."/>
                         <div className="card-body text-center">
-                            <h5 className="card-title">Mark Task as Completed</h5>
+                            <h5 className="card-title">Toggle Task as Completed</h5>
                             <p>Stay focused and committed to making progress each day. Filter the tasks based on their pending status to stay focused. when done, <span className="text-primary">mark the task as completed.  </span></p>
                         </div>
                     </div>

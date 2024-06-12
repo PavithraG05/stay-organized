@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import styles from './addtodoform.module.css';
-import ToastMsg from './ToastMsg';
 import useFetch from './useFetch';
+// import { toast, ToastContainer } from 'react-toastify';
 
 const todoForm = {
     Username:"",
@@ -25,6 +25,7 @@ const AddTodoForm = () => {
     const [deadlineErr,setDeadlineErr] = useState("");
     const [priorityErr,setPriorityErr] = useState("");
     const [apiErr, setApiErr] = useState("");
+    const [sucessMessage, setSucessMessage] = useState("");
 
     const {data: categories, loading, error} = useFetch("categories");
     const {data: usernames, userloading, usererror} = useFetch("users");
@@ -36,6 +37,7 @@ const AddTodoForm = () => {
     if(usererror) setUsernameErr("Error fetching categories using API");
 
     function handleChange(e){
+        setSucessMessage("");
         const name = e.target.name;
         const value = e.target.value;
         // console.log(name,value);
@@ -103,16 +105,19 @@ const AddTodoForm = () => {
                 body: JSON.stringify(todo)
             }
         )
-        .then((response) => response.json())
+        .then((response) => {response.json()   
+        })
         .then((data) => {
-            alert("Todo added successfully");
-            // return(
-            //     <ToastMsg msg="Todo added successfully"/>
-            // )
+            // alert("Todo added successfully");
+            setSucessMessage("Todo added successfully!!");
+
+            // toast.success('Todo added successfully!',{
+            //     position: toast.POSITION.TOP_CENTER
+            // });
         })
         .catch((error) => {
             console.log(error);
-            setApiErr("Error fetching details using API");
+            setApiErr("Error adding details to API");
         });
     }
 
@@ -187,21 +192,12 @@ const AddTodoForm = () => {
                                 {priorityErr}
                             </div>}
                         </div>
-                        {apiErr && <div className="errorFormField">{apiErr}</div>}
+                        {apiErr && <div className={`${styles.errorFormField}`}>{apiErr}</div>}
                         <div className="row p-3 justify-content-center">
                             <button className={`btn text-white ${styles.newtodoBtn} rounded-0`} type="submit" onClick={handleSubmit}>ADD TODO</button>
                         </div>
                     </form>
-
-                    {/* <div className="toast align-items-center" role="alert" aria-live="assertive" aria-atomic="true">
-                        <div className="d-flex">
-                          <div className="toast-body" id="toast_msg">
-                                Todo task has been added successfully
-                          </div>
-                          <button type="button" className="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-                        </div>
-                    </div>
-                     */}
+                    {sucessMessage && <div className={`${styles.successMsg}`}><i className="bi bi-check-circle-fill text-success"></i> &nbsp;{sucessMessage} </div>}
                 </div>
             </div>
         );

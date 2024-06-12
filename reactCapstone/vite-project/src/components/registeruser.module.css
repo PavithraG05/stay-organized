@@ -38,3 +38,10 @@
 .fieldBorderColor{
     border: 1px solid #dc3545 !important;
 }
+
+.successMsg{
+    color:green;
+    font-size: 17px;
+    /* padding:5px 0px; */
+    text-align: center;
+}

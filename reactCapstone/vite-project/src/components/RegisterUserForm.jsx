@@ -21,12 +21,14 @@ const RegisterUserForm = () => {
     const [confirmPasswordErr, setConfirmPasswordErr ] = useState("");
     const [showPassword, setShowPassword] = useState(true);
     const [apiErr, setApiErr] = useState("");
+    const [sucessMessage, setSucessMessage] = useState("");
     
     // useEffect(()=>{handleConfirmPassword();
     //     console.log("password changed")
     // },[form.Password]);
     
     function handleChange(e){
+        setSucessMessage("");
         const name = e.target.name;
         const value = e.target.value;
         // console.log(name,value);
@@ -48,11 +50,12 @@ const RegisterUserForm = () => {
         )
         .then((response) => response.json())
         .then((data) => {
-            alert("user added successfully");
+            // alert("user added successfully");
+            setSucessMessage("User added successfully!!");
         })
         .catch((error) => {
             console.log(error)
-            setApiErr("Error fetching details using API");
+            setApiErr("Error adding details using API");
         });
     }
 
@@ -221,7 +224,7 @@ const RegisterUserForm = () => {
                     <button className={`btn text-white ${styles.registerBtn} rounded-0`} type="submit" id="registerBtn" onClick={handleSubmit}>REGISTER</button>
                 </div>
             </form>
-           
+            {sucessMessage && <div className={`${styles.successMsg}`}><i className="bi bi-check-circle-fill text-success"></i> &nbsp;{sucessMessage} </div>}
         </div>
     );
 }

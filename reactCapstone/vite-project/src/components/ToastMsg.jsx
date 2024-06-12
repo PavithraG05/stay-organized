@@ -4,8 +4,9 @@ import { ToastContainer, toast } from 'react-toastify';
 
 function ToastMsg({msg}) {
 
-    useEffect(()=>{showToastMessage()},[]);
+    useEffect(()=>{showToastMessage()},[msg]);
     const showToastMessage = () => {
+      console.log("Toast msg");
       toast.success({msg});
     };
   

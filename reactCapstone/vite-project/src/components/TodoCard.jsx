@@ -7,44 +7,36 @@ import DeleteModal from './DeleteModal';
 import getCompletedClass from './getCompletedClass';
 
 
-const TodoCard = ({todo, todos, setTodos}) => {
+const TodoCard = ({todo, todos, setTodos, searchInput}) => {
 
     console.log(`Todo ${JSON.stringify(todo)}`);
     const [todoTask, setTodoTask] = useState([]);
     const [editModalShow, setEditModalShow] = useState(false);
     const [deleteModalShow, setDeleteModalShow] = useState(false);
+    
     useEffect(()=>{
         setTodoTask(todo);
     },[todo]);
- 
+    
     console.log(`TodoTask ${JSON.stringify(todoTask)}`)
-    
-    
-    // let completed_strike="";
-    // let status_icon_styles = "";
     let status="";
     // console.log(`TodoTask ${JSON.stringify(todoTask)}`);
 
    
     if(todoTask.completed === true){
         status = "Completed";
-        // status_icon_styles = styles.biCheckCircleFill;
-        // completed_strike = styles.strike;
         setTodoTask((todoTask) => ({...todoTask,completed:status}));
     }
     if(todoTask.completed === false){
         status = "Pending";
-        // status_icon_styles = styles.biCheckCircle;
         setTodoTask((todoTask) => ({...todoTask,completed:status}));
     } 
     
-    // console.log(status_icon);
     let colorName = getCategoryColorTodo(todoTask.category);
     let priorityBadge = getPriorityColorBadge(todoTask.priority);
-    const {completed_strike , status_icon_styles} = getCompletedClass(todoTask.completed); 
+    const {completed_strike , status_icon_styles, status_icon} = getCompletedClass(todoTask.completed); 
 
     function updateStatus(taskid, status) {
-        // console.log(`Clicked on id ${taskid} ${status}`);
         let completed_status = false;
         if(todoTask.completed === 'Pending'){
             completed_status = true;
@@ -55,7 +47,7 @@ const TodoCard = ({todo, todos, setTodos}) => {
             setTodoTask((todoTask) => ({...todoTask,completed:"Pending"}));
         }
 
-        completed_status = Boolean(todoTask.completed);
+        completed_status = Boolean(completed_status);
         // console.log(typeof completed_status);
         console.log(completed_status);
         fetch(`http://localhost:8085/api/todos/${taskid}`,{
@@ -67,18 +59,12 @@ const TodoCard = ({todo, todos, setTodos}) => {
             response.json();
         })
         .then (json => {
-            //let text = `Todo task has been added successfully`;
-            //console.log(text);
-            //let message = document.getElementById("toast_msg");
-            //message.innerHTML=text;
-            //$('.toast').toast('show');
-            // alert('Todo status has been updated successfully');
             const new_todos = todos.map((todo) => todo.id === taskid ? 
             {...todo,
             completed:completed_status, 
             }:todo)
             console.log(`update status new_todos ${JSON.stringify(new_todos)}`);
-            // setTodos(new_todos);
+            setTodos(new_todos);
         })
         .catch(err => {
             console.log(err);
@@ -86,37 +72,24 @@ const TodoCard = ({todo, todos, setTodos}) => {
      }
 
     function editTodo(todo, status){
-        // console.log(todo.category);
-        // console.log(todo.description);
-        // console.log(todo.priority);
-        // console.log(todo.deadline);
-        // console.log(status);
-        // console.log(todo.id);
         setEditModalShow(true);
-        // setTodoTask((todoTask) => ({
-        //     ...todoTask,
-        //     category:todo.category,
-        //     description:todo.description,
-        //     deadline:todo.deadline,
-        //     priority:todo.priority,
-        //     completed:status,
-        //     id:todo.id
-        // }));
     }
 
     function deleteTodo(todo, status){
         setDeleteModalShow(true);
-        // setTodoTask((todoTask) => ({
-        //     ...todoTask,
-        //     category:todo.category,
-        //     description:todo.description,
-        //     deadline:todo.deadline,
-        //     priority:todo.priority,
-        //     completed:status,
-        //     id:todo.id
-        // }));
     }
+
+    function highlightTask(desc, searchInput){
+        // console.log(`desc ${desc}`);
+        if(desc){
+            const parts = desc.split(new RegExp(`(${searchInput})`,`gi`));
+            console.log(`Search parts ${parts}`);
+            return parts.map((part,i) => part.toLowerCase() === searchInput.toLowerCase()? <mark key={i}>{part}</mark>:part);
+        }
+    }
+    
     return(
+        <>
         <div className={`card ${styles.todoCard}`}>
         <div className={`card-header ${styles.todoCategoryHeader}`}>
             <p>
@@ -125,17 +98,23 @@ const TodoCard = ({todo, todos, setTodos}) => {
                 <span className={`badge ${priorityBadge}`}>{todoTask.priority}</span>
                 <span className={`${styles.todoIcons}`}>
                     
-                    <i className={`bi bi-star ${styles.biStar}`}></i>
+                    {/* <i className={`bi bi-star ${styles.biStar}`}></i> */}
                     <i className={`bi bi-pencil-square ${styles.biPencilSquare}`} onClick={()=>editTodo(todoTask, status)}></i>
                     <i className={`bi bi-trash ${styles.biTrash}`} onClick={()=>deleteTodo(todoTask, status)}></i>
-                    <i className={`bi bi-check-circle ${status_icon_styles}`} onClick={()=>updateStatus(todoTask.id, status)} ></i>
+                    <i className={`bi  ${status_icon} ${status_icon_styles}`} onClick={()=>updateStatus(todoTask.id, status)} ></i>
                 </span>
             </p>
         </div>
         <div className={`card-body ${styles.todoBody}`}>
             <div className="row">
                 <div className="col-9">
-                    <h6 className={`card-title ${styles.todoDesc} ${completed_strike}`}>{todoTask.description}</h6>
+                    
+                    { searchInput.length <= 0 &&
+                        <h6 className={`card-title ${styles.todoDesc} ${completed_strike}`}>{todoTask.description}</h6>
+                    }
+                    { searchInput.length > 0 &&
+                        <h6 className={`card-title ${styles.todoDesc} ${completed_strike}`}>{highlightTask(todoTask.description, searchInput)}</h6>
+                    }
                 </div>
                 <div className="col-3">
                     <a><h6 className={styles.todoStatus}>{todoTask.completed}</h6></a>
@@ -146,7 +125,7 @@ const TodoCard = ({todo, todos, setTodos}) => {
         <EditModal editModalShow={editModalShow} setEditModalShow={setEditModalShow} todoTask={todoTask} setTodoTask={setTodoTask} todos={todos} setTodos={setTodos}/>
         <DeleteModal deleteModalShow = {deleteModalShow} setDeleteModalShow={setDeleteModalShow} todoTask={todoTask} todos={todos} setTodos={setTodos}/>
     </div>
-    
+    </>
     )
 }
 
