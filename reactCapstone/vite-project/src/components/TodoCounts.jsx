@@ -10,6 +10,7 @@ const TodoCounts = ({countTodo, todos, setTodos,setFilterState, setFilteredArray
     console.log("category populating from api");
     if (loading) return "Loading...";
     if(error) setCategoryApiErr("Error fetching categories using API");
+    const filterClass = "";
 
     function filterStatus(status){
         console.log(`Clicked ${status}`)
@@ -19,6 +20,7 @@ const TodoCounts = ({countTodo, todos, setTodos,setFilterState, setFilteredArray
         setFilteredArray(output);
         // console.log(`output filtered ${JSON.stringify(output)}`)
         // setTodos(output);
+        // filterClass = styles.selectedFilterItem;
     }
 
     function filterPriority(priority){
@@ -26,6 +28,7 @@ const TodoCounts = ({countTodo, todos, setTodos,setFilterState, setFilteredArray
         setFilterState(true);
         let output = todos.filter((todo) => todo.priority === priority);
         setFilteredArray(output);
+        
         // console.log(`output filtered ${JSON.stringify(output)}`)
         // setTodos(output);
     }
@@ -110,6 +113,9 @@ const TodoCounts = ({countTodo, todos, setTodos,setFilterState, setFilteredArray
                     </li>
                 </ul>
                 <hr/>
+                {/* <div>
+                    <button className="text-center">Clear Filter</button>
+                </div> */}
             </div>
         </div>
     );

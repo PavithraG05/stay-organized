@@ -42,7 +42,7 @@ const Todos = ({userid,todos, setTodos, filterState, setFilterState, filteredArr
         <div className={`col-md-6 col-xl-6 ${styles.searchContainer}`}>
             <div className={`input-group ${styles.searchSize} mb-3`}>
             <span className={`input-group-text ${styles.searchLabel}`} id="basic-addon1"><i className="bi bi-search"></i></span>
-            <input type="text" className={`form-control ${styles.searchBar}`} placeholder="Search Todos" aria-label="search" value={searchInput} aria-describedby="basic-addon1" onChange={handleSearch}/>
+            <input type="text" className={`form-control ${styles.searchBar}`} placeholder="Search tasks based on description" aria-label="search" value={searchInput} aria-describedby="basic-addon1" onChange={handleSearch}/>
             </div>
         </div>
         <div className="col-sm-12 col-md-3 col-xl-3">
