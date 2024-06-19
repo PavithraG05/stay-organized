@@ -1,9 +1,12 @@
 {
+  "homepage": "https://pavithra05.github.io/stay-organized",
   "name": "stayorganized_server",
   "version": "1.0.0",
   "description": "This is a simple server provided to support the stay orgranized workshop",
   "main": "server.js",
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
@@ -14,5 +17,8 @@
     "express": "^4.18.1",
     "react-router-dom": "^6.23.1",
     "react-toastify": "^10.0.5"
+  },
+  "devDependencies": {
+    "gh-pages": "^6.1.1"
   }
 }
